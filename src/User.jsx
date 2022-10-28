@@ -1,53 +1,45 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Loading from './Loading';
+import UserInfo from './UserInfo';
 
 const User = () => {
   const [users, setUser] = useState([]);
   const [loading, setLoading] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [dataPerPage, setDataPerPage] = useState(4);
+
+  const lastIndex = currentPage * 4;
+  const firstIndex = lastIndex - 4;
+  const itemToDisplay = users.slice(firstIndex, lastIndex)
+
+
   useEffect(() => {
     // setLoading(true)
     fetch('https://randomuser.me/api/?results=20&nat=UK')
-    .then((response) => response.json())
-    .then((userData) => setUser(userData.results));
+      .then((response) => response.json())
+      .then((userData) => setUser(userData.results));
     setLoading(false)
   }, []);
 
-    const mapUsers = () => {
-      console.log(users);
-      return users.map((user, i) =>
-       <div className = 'profile' key={i}>
-        <img src={user.picture.large} alt={user.login.username} />
-        <div className="user">
-        <h4>Name: {user.name.first} {user.name.last}</h4>
-        <h4>Email: {user.email}</h4>
-        <h4>Gender: {user.gender}</h4>
-        </div>
-       </div> 
-        )
-        if(loading){
-          return(<Loading></Loading>)
-        }
-        let pages = []
-        for (let i = 1; i< 10; i++){
-          pages.push[i];
-          // console.log(pages)
-        }
-      // login.username
-      // picture.medium  
-    };
 
-    
-    return (
-      
-      <section className="section">
-        <h2 className='user-h2'>User Data</h2>
-        <div id='user-grid'>{mapUsers()}</div>
-
-       </section>
+  if (loading) {
+    return (<Loading></Loading>)
+  }
 
 
-)
+
+
+  return (
+
+    <section className="section">
+      <h2 className='user-h2'>User Data</h2>
+      <UserInfo users={itemToDisplay}></UserInfo>
+
+    </section>
+
+
+  )
 }
 
 // pagination
