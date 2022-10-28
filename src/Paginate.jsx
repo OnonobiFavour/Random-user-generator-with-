@@ -9,6 +9,9 @@ const Paginate = ({totalPost, dataPerPage, setCurrentPage, currentPage}) => {
   return (
     <div className='btn'>
         {currentPage !== 1 && <button onClick={()=> setCurrentPage(currentPage -1)}>&larr;</button>}
+        {pageNumber.map((page, index) => {
+            <button key={index} onClick={()=> setCurrentPage(pageNumber)}> {page}</button>
+        })}
         {currentPage !== 5 && <button onClick={()=> setCurrentPage(currentPage +1)}>&rarr;</button>}
     </div>
   )

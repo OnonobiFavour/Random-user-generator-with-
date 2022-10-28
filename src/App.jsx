@@ -10,13 +10,15 @@ import Home from './Home';
 import Nav from './Nav';
 import User from './User';
 import Error from './Error';
+import ErrorBoundary from './ErrorBoundary';
 
 
 const App = () => {
 
- 
-
+  
+  
   return (
+    <ErrorBoundary>
     <Router>
       <Routes>
 
@@ -42,6 +44,8 @@ const App = () => {
 
       </Routes>
     </Router>
+
+    </ErrorBoundary>
   )
 }
 
