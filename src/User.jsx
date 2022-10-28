@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Loading from './Loading';
+import Paginate from './Paginate';
 import UserInfo from './UserInfo';
 
 const User = () => {
@@ -35,7 +36,12 @@ const User = () => {
     <section className="section">
       <h2 className='user-h2'>User Data</h2>
       <UserInfo users={itemToDisplay}></UserInfo>
-
+      <Paginate 
+      totalPost={users.length}
+      dataPerPage={dataPerPage}
+      setCurrentPage={setCurrentPage}
+      currentPage={currentPage}
+      ></Paginate>
     </section>
 
 
